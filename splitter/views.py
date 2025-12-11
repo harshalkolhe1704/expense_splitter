@@ -3,6 +3,14 @@ from .models import Expense
 from .forms import ExpenseForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    
+    def form_valid(self, form):
+        messages.success(self.request, 'Login successful!')
+        return super().form_valid(form)
 
 def register(request):
     if request.method == 'POST':

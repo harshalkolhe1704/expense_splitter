@@ -27,6 +27,18 @@
             <a href="{% url 'register' %}">Register</a>
             {% endif %}
         </div>
+
+        {% if messages %}
+        <div class="messages" style="margin: 20px 0;">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                style="padding: 10px; border-radius: 4px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </div>
