@@ -1,0 +1,33 @@
+{% extends 'splitter/base.html' %}
+
+{% block content %}
+<h2>Expense History</h2>
+{% if expenses %}
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Total Amount</th>
+            <th>Participants</th>
+            <th>Share Per Person</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>${{ expense.amount }}</td>
+            <td>{{ expense.participants }}</td>
+            <td>${{ expense.share_per_person }}</td>
+            <td>{{ expense.date|date:"F j, Y, P" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No expenses added yet.</p>
+{% endif %}
+<br>
+<a href="{% url 'add_expense' %}" class="btn">Add Another Expense</a>
+{% endblock %}
