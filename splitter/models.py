@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Expense(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1) # Default 1 for migration, but we will reset DB
     title = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     participants = models.TextField(help_text="Comma-separated list of participants")

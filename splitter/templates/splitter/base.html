@@ -13,8 +13,19 @@
     <div class="container">
         <h1>Smart Expense Splitter</h1>
         <div class="nav-links">
-            <a href="{% url 'add_expense' %}">Add Expense</a> |
-            <a href="{% url 'history' %}">Expense History</a>
+            {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span> |
+            <a href="{% url 'add' %}">Add Expense</a> |
+            <a href="{% url 'history' %}">History</a> |
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit"
+                    style="background:none; border:none; color:blue; text-decoration:underline; cursor:pointer;">Logout</button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'register' %}">Register</a>
+            {% endif %}
         </div>
         {% block content %}
         {% endblock %}
